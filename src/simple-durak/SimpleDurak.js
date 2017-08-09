@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'; 
 import Enum from 'es6-enum'
 
 //Класс-модель
