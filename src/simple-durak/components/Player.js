@@ -8,7 +8,6 @@ class Player extends React.Component{
     constructor(props){
         super(props);
 
-        this.handleChange = this.handleChange.bind(this);
         this.handleNextButtonClick = this.handleNextButtonClick.bind(this);
         this.handlePrevButtonClick = this.handlePrevButtonClick.bind(this);    
     }
@@ -21,13 +20,9 @@ class Player extends React.Component{
         this.props.onPrevClick();
     }
 
-    handleChange(e){
-        this.props.onCardsChange();        
-    }
-
     render(){
         let output = null;
-
+ 
         let cards = [];
         for(let i = 0; i < this.props.cards.length; i++){
             cards.push(
@@ -37,7 +32,7 @@ class Player extends React.Component{
                     size={this.props.cards[i].size} 
                     suit={this.props.cards[i].suit}
                     power={this.props.cards[i].power}
-                    onCardClick={this.props.cards[i].onCardClick}
+                    onCardClick={this.props.handlePlayerMove}
                     bootStrapColClass={this.props.cards[i].bootStrapColClass}
                     hidden={this.props.cards[i].hidden}
                     />      
@@ -46,9 +41,7 @@ class Player extends React.Component{
         
         if(this.props.viewMode===this.props.viewModes.developerMode){
             output = (
-                <div className="container"
-                    onClick={this.handleChange}>
-
+                <div className="container">
                     <div className="row justify-content-center">
                         {cards}
                     </div>
@@ -99,8 +92,7 @@ class Player extends React.Component{
                 }
                  
                 output = (
-                    <div className="container"
-                        onClick={this.handleChange}>
+                    <div className="container">
                         
                         <div className="row justify-content-center">
                             <div className="col-1 align-self-center">
@@ -126,11 +118,11 @@ export default Player;
 
 Player.propTypes = {
     cards: PropTypes.array,
-    onCardsChange: PropTypes.func,
-    viewMode:PropTypes.string,
+    viewMode:PropTypes.string, 
     viewModes: PropTypes.object,
     onPrevClick: PropTypes.func,
     onNextClick: PropTypes.func,
     playerStartInd: PropTypes.number,
-    playerEndInd: PropTypes.number
+    playerEndInd: PropTypes.number,
+    handlePlayerMove: PropTypes.func
 };

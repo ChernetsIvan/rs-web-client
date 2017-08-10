@@ -88,8 +88,7 @@ class SimpleDurak extends React.Component{
         
         this.handlePlayerTakeClick = this.handlePlayerTakeClick.bind(this);
         this.handleAiTakeClick = this.handleAiTakeClick.bind(this);
-        
-        this.handlePlayerCardsChange = this.handlePlayerCardsChange.bind(this);
+
         this.handlePlayerMove = this.handlePlayerMove.bind(this);
         this.handleChangeViewMode = this.handleChangeViewMode.bind(this);
         
@@ -161,19 +160,17 @@ class SimpleDurak extends React.Component{
         });
     }
 
-    handlePlayerCardsChange(){
-        this.setState({
-            playerField: playerField,
-            playerCards: playerCards,
-        })
-    }
-
     handlePlayerMove(cardID){
         PlayerActionsHandler.handleClickOnCard(
             cardID, playerCards, gameMode, GameMode, playerField,
             isFieldContainSuchCard, AiActions.makeAi_Defence_Move, aiField,
             trumpSuit, AiActions.makeAi_Attack_Move, fullDeck, computerCards,
-            removeCardsFromTableAndGiveCards);        
+            removeCardsFromTableAndGiveCards);
+        
+        this.setState({
+            playerField: playerField,
+            playerCards: playerCards,
+        })
     }
 
     handleChangeViewMode(){
@@ -316,14 +313,14 @@ function RenderDeveloperViewMode(simpleDurakObject){
             <br/> 
             Вы: 
             <Player 
-                cards={playerCards} 
-                onCardsChange={simpleDurakObject.handlePlayerCardsChange}
+                cards={playerCards}
                 viewMode={ViewMode}
                 viewModes={viewModes}
                 onPrevClick={simpleDurakObject.handlePlayerPrevButtonClick}
                 onNextClick={simpleDurakObject.handlePlayerNextButtonClick}
                 playerStartInd={simpleDurakObject.state.playerStartInd}
-                playerEndInd={simpleDurakObject.state.playerEndInd}/>              
+                playerEndInd={simpleDurakObject.state.playerEndInd}
+                handlePlayerMove={simpleDurakObject.handlePlayerMove} />              
 
             <RemoveCardsFromTableButton 
                 aiField={aiField}
@@ -396,14 +393,14 @@ function RenderUserViewMode(simpleDurakObject){
                     <div className="col-1"></div>
                     <div className="col-10">
                         <Player 
-                            cards={playerCards} 
-                            onCardsChange={simpleDurakObject.handlePlayerCardsChange}
+                            cards={playerCards}
                             viewMode={ViewMode}
                             viewModes={viewModes} 
                             onPrevClick={simpleDurakObject.handlePlayerPrevButtonClick}
                             onNextClick={simpleDurakObject.handlePlayerNextButtonClick}
                             playerStartInd={simpleDurakObject.state.playerStartInd}
-                            playerEndInd={simpleDurakObject.state.playerEndInd}/>                                                                                                  
+                            playerEndInd={simpleDurakObject.state.playerEndInd}
+                            handlePlayerMove={simpleDurakObject.handlePlayerMove} />  
                     </div>
                     <div className="col-1"></div>
                 </div>
@@ -493,8 +490,7 @@ function startGameButtonClickHandler(simpleDurakObject){
         for(let j = 0; j < cardSizes.length; j++){
             power = coef * cardSizes[j].cardValue;
             fullDeck.push(
-                new CardModel(z, cardSizes[j], cardSuits[i], power, 
-                    simpleDurakObject.handlePlayerMove, "col-1", false)                                
+                new CardModel(z, cardSizes[j], cardSuits[i], power, false)                                
             );
             z++;
         }
