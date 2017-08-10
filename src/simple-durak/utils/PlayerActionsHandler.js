@@ -22,13 +22,8 @@ class PlayerActionsHandler{
                             playerCards.splice(i, 1);                         
                             gameMode.mode = GameMode.AiDefence;                        
                             //заставляем AI сделать ход защиты
-                            makeAi_Defence_Move(
-                                gameMode, 
-                                GameMode, 
-                                playerField, 
-                                computerCards,
-                                aiField, 
-                                trumpSuit);
+                            makeAi_Defence_Move(gameMode, GameMode, playerField, 
+                                computerCards, aiField, trumpSuit);
                         }
                         break;
                     }
@@ -52,14 +47,8 @@ class PlayerActionsHandler{
                                 playerCards.splice(i, 1);
                                 gameMode.mode = GameMode.AiAttack;   
                                 //заставляем AI сделать ход атаки
-                                makeAi_Attack_Move(
-                                    gameMode, 
-                                    GameMode, 
-                                    computerCards, 
-                                    aiField,
-                                    isFieldContainSuchCard, 
-                                    fullDeck,
-                                    removeCardsFromTableAndGiveCards);     
+                                makeAi_Attack_Move(gameMode, GameMode, computerCards, aiField, 
+                                    isFieldContainSuchCard, fullDeck, removeCardsFromTableAndGiveCards);     
                             }                    
                         }
                         break;

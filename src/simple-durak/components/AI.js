@@ -10,20 +10,11 @@ class AI extends React.Component{
         
         if(this.props.viewMode===this.props.viewModes.developerMode){
 
-            let cards = [];
-            for(let i = 0; i < this.props.cards.length; i++){
-                cards.push(
-                    <Card 
-                        id = {this.props.cards[i].id} 
-                        key={this.props.cards[i].id} 
-                        size={this.props.cards[i].size} 
-                        suit={this.props.cards[i].suit}
-                        onCardClick={this.props.cards[i].onCardClick}
-                        bootStrapColClass="col-1"
-                        hidden={false}
-                        />      
-                );
-            }
+            let cards = this.props.cards.map((elem)=>{
+                return <Card id = {elem.id} key={elem.id} size={elem.size} suit={elem.suit}
+                    bootStrapColClass="col-1" hidden={false}
+                    />;
+            });
 
             output = (
                 <div className="container">
@@ -49,16 +40,9 @@ class AI extends React.Component{
                     out_countOfCardsThatNotShown = <b>+{countOfCardsThatNotShown}</b>;
                 }
 
-
-                let outputCards = [];
-                for(let i = 0; i < inputCards.length; i ++){
-                    outputCards.push(
-                        <Card 
-                            key={inputCards[i].id}
-                            bootStrapColClass="col-1 ml-3"
-                            hidden={true}/>
-                    );
-                }
+                let outputCards = inputCards.map((elem)=>{
+                    return <Card key={elem.id} bootStrapColClass="col-1 ml-3" hidden={true}/>
+                }); 
 
                 output = (
                     <div className="container mt-1">
