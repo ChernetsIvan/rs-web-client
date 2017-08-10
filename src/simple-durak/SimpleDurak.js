@@ -302,14 +302,8 @@ function RenderDeveloperViewMode(simpleDurakObject){
                 viewMode={ViewMode}
                 viewModes={viewModes} />
             <br />
-            <Field 
-                cards={aiField}
-                viewMode={ViewMode}
-                viewModes={viewModes}  />                
-            <Field 
-                cards={playerField}
-                viewMode={ViewMode}
-                viewModes={viewModes} />
+            <Field cards={aiField} />                
+            <Field cards={playerField} />
             <br/> 
             Вы: 
             <Player 
@@ -370,14 +364,8 @@ function RenderUserViewMode(simpleDurakObject){
             <div className="container">
                 <div className="row align-items-center">
                     <div className="col-10">
-                        <Field 
-                            cards={aiField}
-                            viewMode={ViewMode}
-                            viewModes={viewModes} />                
-                        <Field 
-                            cards={playerField}
-                            viewMode={ViewMode}
-                            viewModes={viewModes} />
+                        <Field cards={aiField} />                
+                        <Field cards={playerField} />
                     </div>
                     <div className="col-2">
                         <Deck 
