@@ -13,19 +13,10 @@ class Deck extends React.Component{
 
         let output = null;
 
-        let cards = [];
-        for(let i = 0; i < cardsWithoutLast.length; i++){
-            cards.push(
-                <Card 
-                    id = {cardsWithoutLast[i].id} 
-                    key={cardsWithoutLast[i].id} 
-                    size={cardsWithoutLast[i].size} 
-                    suit={cardsWithoutLast[i].suit}
-                    bootStrapColClass="col-1"
-                    hidden={false}
-                    />      
-            );
-        }
+        let cards = cardsWithoutLast.map((elem)=>{
+            return <Card key={elem.id} size={elem.size} suit={elem.suit} 
+                bootStrapColClass="col-1" hidden={false}/>;
+        })
         
         if(this.props.viewMode===this.props.viewModes.developerMode){
             //Отрисовывать в этом режиме:
@@ -36,14 +27,8 @@ class Deck extends React.Component{
             let output_TrumpCard = null;
             if(trumpCard !== undefined){
                 output_TrumpCard = 
-                    <Card 
-                        id ={trumpCard.id}
-                        key={trumpCard.id} 
-                        size={trumpCard.size} 
-                        suit={trumpCard.suit}
-                        bootStrapColClass="col-1"
-                        hidden={false}
-                        />;
+                    <Card key={trumpCard.id} size={trumpCard.size} suit={trumpCard.suit}
+                        bootStrapColClass="col-1" hidden={false} />;
             } 
 
             output = (
@@ -68,14 +53,8 @@ class Deck extends React.Component{
             if(trumpCard !== undefined){
                 //"Переопределяем" bootstrap-класс col-6 вместо col-1:
                 output_TrumpCard = 
-                    <Card 
-                        id ={trumpCard.id}
-                        key={trumpCard.id} 
-                        size={trumpCard.size} 
-                        suit={trumpCard.suit}
-                        bootStrapColClass="col-6"
-                        hidden={false}
-                        />;
+                    <Card key={trumpCard.id} size={trumpCard.size} suit={trumpCard.suit}
+                        bootStrapColClass="col-6" hidden={false} />;
             }
             
             //2)Колода.
@@ -84,12 +63,7 @@ class Deck extends React.Component{
             if(cardsWithoutLast.length > 0){
                 //37 - заведомо уникальный key
                 output_MockDeck = 
-                    <Card 
-                        key={37} 
-                        bootStrapColClass="col-6"
-                        hidden={true}
-                        />;
-
+                    <Card key={37} bootStrapColClass="col-6" hidden={true} />;
                 output_CountOfCardsInDeck = cardsWithoutLast.length;
             }
 

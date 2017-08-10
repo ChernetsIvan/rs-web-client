@@ -12,8 +12,7 @@ class AI extends React.Component{
 
             let cards = this.props.cards.map((elem)=>{
                 return <Card id = {elem.id} key={elem.id} size={elem.size} suit={elem.suit}
-                    bootStrapColClass="col-1" hidden={false}
-                    />;
+                    bootStrapColClass="col-1" hidden={false} />;
             });
 
             output = (
