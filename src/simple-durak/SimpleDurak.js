@@ -490,7 +490,7 @@ function startGameButtonClickHandler(simpleDurakObject){
         for(let j = 0; j < cardSizes.length; j++){
             power = coef * cardSizes[j].cardValue;
             fullDeck.push(
-                new CardModel(z, cardSizes[j], cardSuits[i], power, false)                                
+                new CardModel(z, cardSizes[j], cardSuits[i], power)                                
             );
             z++;
         }

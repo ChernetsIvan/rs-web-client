@@ -18,7 +18,7 @@ class Field extends React.Component{
                     suit={this.props.cards[i].suit}
                     power={this.props.cards[i].power}
                     bootStrapColClass={"col-1"}
-                    hidden={this.props.cards[i].hidden}
+                    hidden={false}
                     />      
             );
         }

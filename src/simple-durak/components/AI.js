@@ -21,7 +21,7 @@ class AI extends React.Component{
                         power={this.props.cards[i].power}
                         onCardClick={this.props.cards[i].onCardClick}
                         bootStrapColClass="col-1"
-                        hidden={this.props.cards[i].hidden}
+                        hidden={false}
                         />      
                 );
             }
