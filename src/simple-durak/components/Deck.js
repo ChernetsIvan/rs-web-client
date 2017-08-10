@@ -22,9 +22,8 @@ class Deck extends React.Component{
                     size={cardsWithoutLast[i].size} 
                     suit={cardsWithoutLast[i].suit}
                     power={cardsWithoutLast[i].power}
-                    onCardClick={cardsWithoutLast[i].onCardClick}
-                    bootStrapColClass={cardsWithoutLast[i].bootStrapColClass}
-                    hidden={cardsWithoutLast[i].hidden}
+                    bootStrapColClass="col-1"
+                    hidden={false}
                     />      
             );
         }
@@ -44,9 +43,8 @@ class Deck extends React.Component{
                         size={trumpCard.size} 
                         suit={trumpCard.suit}
                         power={trumpCard.power}
-                        onCardClick={trumpCard.onCardClick}
-                        bootStrapColClass={trumpCard.bootStrapColClass}
-                        hidden={trumpCard.hidden}
+                        bootStrapColClass="col-1"
+                        hidden={false}
                         />;
             } 
 
@@ -78,9 +76,8 @@ class Deck extends React.Component{
                         size={trumpCard.size} 
                         suit={trumpCard.suit}
                         power={trumpCard.power}
-                        onCardClick={trumpCard.onCardClick}
                         bootStrapColClass="col-6"
-                        hidden={trumpCard.hidden}
+                        hidden={false}
                         />;
             }
             

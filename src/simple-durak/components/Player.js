@@ -33,7 +33,7 @@ class Player extends React.Component{
                     suit={this.props.cards[i].suit}
                     power={this.props.cards[i].power}
                     onCardClick={this.props.handlePlayerMove}
-                    bootStrapColClass={this.props.cards[i].bootStrapColClass}
+                    bootStrapColClass="col-1"
                     hidden={this.props.cards[i].hidden}
                     />      
             );
