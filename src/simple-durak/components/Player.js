@@ -22,21 +22,11 @@ class Player extends React.Component{
 
     render(){
         let output = null;
- 
-        let cards = [];
-        for(let i = 0; i < this.props.cards.length; i++){
-            cards.push(
-                <Card 
-                    id = {this.props.cards[i].id} 
-                    key={this.props.cards[i].id} 
-                    size={this.props.cards[i].size} 
-                    suit={this.props.cards[i].suit}
-                    onCardClick={this.props.handlePlayerMove}
-                    bootStrapColClass="col-1"
-                    hidden={false}
-                    />      
-            );
-        }
+
+        let cards = this.props.cards.map((el)=>{
+            return <Card id = {el.id} key={el.id} size={el.size} suit={el.suit}
+                onCardClick={this.props.handlePlayerMove} bootStrapColClass="col-1" hidden={false} />
+        });
         
         if(this.props.viewMode===this.props.viewModes.developerMode){
             output = (
@@ -49,37 +39,24 @@ class Player extends React.Component{
         }
         
         if(this.props.viewMode===this.props.viewModes.userMode){
-            if(this.props.cards.length > 0){   
-
+            if(this.props.cards.length > 0){
                 //Показ кнопок Prev и Next
                 let out_PrevButton = null;
-                if(this.props.playerStartInd > 0
-                    && this.props.cards.length > 10){
-
+                if(this.props.playerStartInd > 0 && this.props.cards.length > 10){
                     out_PrevButton = (
-                        <button onClick={this.handlePrevButtonClick}
-                            className="btn btn-info">
-
+                        <button onClick={this.handlePrevButtonClick} className="btn btn-info">
                             <b>&larr;{this.props.playerStartInd}</b>
                         </button>
                     );
-                }else{
-                    out_PrevButton = null;
                 }
 
                 let out_NextButton = null;
-                if(this.props.playerEndInd < this.props.cards.length-1
-                    && this.props.cards.length > 10){
-
+                if(this.props.playerEndInd < this.props.cards.length-1 && this.props.cards.length > 10){
                     out_NextButton = (
-                        <button onClick={this.handleNextButtonClick}
-                            className="btn btn-info">
-
+                        <button onClick={this.handleNextButtonClick} className="btn btn-info">
                             <b>{(this.props.cards.length-1) - this.props.playerEndInd}&rarr;</b>
                         </button>
                     );
-                }else{
-                    out_NextButton = null;
                 }
 
                 //Выводим максимум 10 карт: от startInd до endInd
@@ -91,8 +68,7 @@ class Player extends React.Component{
                 }
                  
                 output = (
-                    <div className="container">
-                        
+                    <div className="container">                        
                         <div className="row justify-content-center">
                             <div className="col-1 align-self-center">
                                 {out_PrevButton}

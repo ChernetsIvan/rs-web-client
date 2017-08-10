@@ -41,7 +41,6 @@ class Status extends React.Component{
         }
         
         let dash = <span>&mdash;</span>;
-
         return (
             <div className="col-auto">
                 <h3 className="mt-2">{dash} {outText}</h3>
