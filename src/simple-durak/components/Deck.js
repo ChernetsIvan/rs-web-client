@@ -21,7 +21,6 @@ class Deck extends React.Component{
                     key={cardsWithoutLast[i].id} 
                     size={cardsWithoutLast[i].size} 
                     suit={cardsWithoutLast[i].suit}
-                    power={cardsWithoutLast[i].power}
                     bootStrapColClass="col-1"
                     hidden={false}
                     />      
@@ -42,7 +41,6 @@ class Deck extends React.Component{
                         key={trumpCard.id} 
                         size={trumpCard.size} 
                         suit={trumpCard.suit}
-                        power={trumpCard.power}
                         bootStrapColClass="col-1"
                         hidden={false}
                         />;
@@ -75,7 +73,6 @@ class Deck extends React.Component{
                         key={trumpCard.id} 
                         size={trumpCard.size} 
                         suit={trumpCard.suit}
-                        power={trumpCard.power}
                         bootStrapColClass="col-6"
                         hidden={false}
                         />;

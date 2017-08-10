@@ -101,7 +101,6 @@ Card.propTypes = {
         cardValue: PropTypes.number
     }),
     suit: PropTypes.string,
-    power: PropTypes.number,
     onCardClick: PropTypes.func,
     bootStrapColClass: PropTypes.string,
     hidden: PropTypes.bool

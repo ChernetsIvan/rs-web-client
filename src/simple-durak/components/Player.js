@@ -31,7 +31,6 @@ class Player extends React.Component{
                     key={this.props.cards[i].id} 
                     size={this.props.cards[i].size} 
                     suit={this.props.cards[i].suit}
-                    power={this.props.cards[i].power}
                     onCardClick={this.props.handlePlayerMove}
                     bootStrapColClass="col-1"
                     hidden={false}
