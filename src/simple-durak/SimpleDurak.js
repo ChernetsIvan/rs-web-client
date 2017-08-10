@@ -17,7 +17,7 @@ import RemoveCardsFromTableButton from './components/buttons/RemoveCardsFromTabl
 import AiTakeButton from './components/buttons/AiTakeButton';
 
 //Классы-утилиты
-import DeckMixer from './utils/DeckMixer';
+import DeckShuffler from './utils/DeckShuffler';
 import CardMover from './utils/CardMover';
 import CardsGiver from './utils/CardsGiver';
 import TrumpChooser from './utils/TrumpChooser';
@@ -490,14 +490,14 @@ function startGameButtonClickHandler(simpleDurakObject){
         for(let j = 0; j < cardSizes.length; j++){
             power = coef * cardSizes[j].cardValue;
             fullDeck.push(
-                new CardModel(z, cardSizes[j], cardSuits[i], power)                                
+                new CardModel(z, cardSizes[j], cardSuits[i], power)
             );
             z++;
         }
     }   
 
     //Вызов этих и выше методов именно в таком порядке!    
-    fullDeck = DeckMixer.mix(fullDeck); 
+    fullDeck = DeckShuffler.shuffle(fullDeck); 
     CardMover.moveAnyCardWithTrumpSuitToTailOfFullDeck(trumpSuit, fullDeck);
     CardsGiver.giveUpToSixCards(fullDeck, computerCards);
     CardsGiver.giveUpToSixCards(fullDeck,playerCards);   

@@ -1,8 +1,8 @@
 //Перемешивает карты в колоде
-class DeckMixer{
+class DeckShuffler{
 
     //Возвращает перемешанную колоду
-    static mix(inputDeck){
+    static shuffle(inputDeck){
         var newFullDeck = [];
         while(inputDeck.length > 0){
             //Случайный индекс в inputDeck
@@ -18,4 +18,4 @@ class DeckMixer{
     }
 }
 
-export default DeckMixer;
+export default DeckShuffler;
