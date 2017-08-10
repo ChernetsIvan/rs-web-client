@@ -95,8 +95,7 @@ class SimpleDurak extends React.Component{
         this.handlePlayerNextButtonClick = this.handlePlayerNextButtonClick.bind(this);
         this.handlePlayerPrevButtonClick = this.handlePlayerPrevButtonClick.bind(this);
 
-        this.handleRadioChangePlayerMoveFirst = this.handleRadioChangePlayerMoveFirst.bind(this);
-        this.handleRadioChangeAiMoveFirst = this.handleRadioChangeAiMoveFirst.bind(this);
+        this.handleRadioChange = this.handleRadioChange.bind(this);
     }
 
     handleBeginGameClick(){
@@ -204,15 +203,8 @@ class SimpleDurak extends React.Component{
         })
     }
 
-    handleRadioChangePlayerMoveFirst(){
-        isFirstMovePlayer = true;
-        this.setState({
-            isFirstMovePlayer: isFirstMovePlayer
-        })
-    }
-
-    handleRadioChangeAiMoveFirst(){
-        isFirstMovePlayer = false;
+    handleRadioChange(){
+        isFirstMovePlayer = !isFirstMovePlayer;
         this.setState({
             isFirstMovePlayer: isFirstMovePlayer
         })
@@ -266,14 +258,14 @@ function RenderSettingsForStartNewGame(simpleDurakObject){
                                 name="PlayerFirst"
                                 className=""
                                 checked={simpleDurakObject.state.isFirstMovePlayer}
-                                onChange={simpleDurakObject.handleRadioChangePlayerMoveFirst}/>
+                                onChange={simpleDurakObject.handleRadioChange}/>
                             <span className="ml-2">Игрок</span>
                         </span>
                         <span className="mr-2">
                             <input type="radio" 
                                 name="AiFirst"
                                 checked={!simpleDurakObject.state.isFirstMovePlayer}
-                                onChange={simpleDurakObject.handleRadioChangeAiMoveFirst}/>
+                                onChange={simpleDurakObject.handleRadioChange}/>
                             <span className="ml-2">Компьютер</span>
                         </span>                        
                     </div>                    
