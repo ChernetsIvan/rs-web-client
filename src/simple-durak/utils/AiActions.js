@@ -1,3 +1,5 @@
+import { foreach } from 'lodash-es';
+
 class AiActions{
 
     //AI: Сделать ход 'защиты'
@@ -10,20 +12,24 @@ class AiActions{
             AiActions.sortInputDeckByPower(computerCards,true);
             
             //Сначала пытаемся отбиться НЕ козырем
-            for(let i=0; i< computerCards.length; i++){        
-                if(computerCards[i].power > cardToBeat.power){
-                    if(computerCards[i].suit.suit === cardToBeat.suit.suit){
+            let result = computerCards.every(function(element,index,array){
+                if(element.power > cardToBeat.power){
+                    if(element.suit.suit === cardToBeat.suit.suit){
                         //сила карты больше, масть сходится -> 
                         //делаем ход минимально возможной по силе - картой.
                         //возможно - козырной, если отбиваем тоже козырную.
-                        let card = computerCards[i];
-                        aiField.push(card);
-                        computerCards.splice(i,1);
+                        aiField.push(element);
+                        computerCards.splice(index,1);
                         gameMode.mode = GameMode.PlayerAttack;
-                        return;
+                        return false;
                     }
-                }        
+                }
+                return true;
+            });
+            if(result===false){
+                return;
             }
+            
 
             //Пытаемся отбиться козырем
             //Значит "отбиваемая" карта -> НЕ козырная
