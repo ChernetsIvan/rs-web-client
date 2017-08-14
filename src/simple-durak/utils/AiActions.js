@@ -1,5 +1,3 @@
-import { foreach } from 'lodash-es';
-
 class AiActions{
 
     //AI: Сделать ход 'защиты'
@@ -28,27 +26,28 @@ class AiActions{
             });
             if(result===false){
                 return;
-            }
-            
+            }            
 
             //Пытаемся отбиться козырем
             //Значит "отбиваемая" карта -> НЕ козырная
-            for(let i=0; i< computerCards.length; i++){    
-                if(computerCards[i].power > cardToBeat.power){
-                    if(computerCards[i].suit.suit === trumpSuit.suit){
-
+            result = computerCards.every(function(element, index, array){
+                if(element.power > cardToBeat.power){
+                    if(element.suit.suit === trumpSuit.suit){
                         //ВОТ ТУТ будем модифицировать, чтобы при козыре Б не
                         //не отбивал 6К ->TБ.
 
                         //сила карты больше, масть НЕ сходится -> 
                         //делаем ход козырной, минимально возможной по силе - картой.
-                        let card = computerCards[i];
-                        aiField.push(card);
-                        computerCards.splice(i,1);
+                        aiField.push(element);
+                        computerCards.splice(index,1);
                         gameMode.mode = GameMode.PlayerAttack;
-                        return;
+                        return false;
                     }
                 }
+                return true;
+            });
+            if(result===false){
+                return;
             }
 
             //AI отбиться не смог. Меняем режим игры на "Игрок Подбрасывает"
