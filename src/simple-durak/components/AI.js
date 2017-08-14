@@ -11,7 +11,7 @@ class AI extends React.Component{
         if(this.props.viewMode===this.props.viewModes.developerMode){
 
             let cards = this.props.cards.map((elem)=>{
-                return <Card id = {elem.id} key={elem.id} size={elem.size} suit={elem.suit}
+                return <Card id = {elem.id} key={elem.id} rank={elem.rank} suit={elem.suit}
                     bootStrapColClass="col-1" hidden={false} />;
             });
 

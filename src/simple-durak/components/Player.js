@@ -24,7 +24,7 @@ class Player extends React.Component{
         let output = null;
 
         let cards = this.props.cards.map((el)=>{
-            return <Card id = {el.id} key={el.id} size={el.size} suit={el.suit}
+            return <Card id = {el.id} key={el.id} rank={el.rank} suit={el.suit}
                 onCardClick={this.props.handlePlayerMove} bootStrapColClass="col-1" hidden={false} />
         });
         

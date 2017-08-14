@@ -1,7 +1,7 @@
 class CardModel{
-    constructor(id, size, suit, power){
+    constructor(id, rank, suit, power){
         this.id = id;
-        this.size = size;
+        this.rank = rank;
         this.suit = suit;
         this.power = power;
     }

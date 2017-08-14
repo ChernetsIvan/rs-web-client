@@ -14,7 +14,7 @@ class Deck extends React.Component{
         let output = null;
 
         let cards = cardsWithoutLast.map((elem)=>{
-            return <Card key={elem.id} size={elem.size} suit={elem.suit} 
+            return <Card key={elem.id} rank={elem.rank} suit={elem.suit} 
                 bootStrapColClass="col-1" hidden={false}/>;
         })
         
@@ -27,7 +27,7 @@ class Deck extends React.Component{
             let output_TrumpCard = null;
             if(trumpCard !== undefined){
                 output_TrumpCard = 
-                    <Card key={trumpCard.id} size={trumpCard.size} suit={trumpCard.suit}
+                    <Card key={trumpCard.id} rank={trumpCard.rank} suit={trumpCard.suit}
                         bootStrapColClass="col-1" hidden={false} />;
             } 
 
@@ -53,7 +53,7 @@ class Deck extends React.Component{
             if(trumpCard !== undefined){
                 //"Переопределяем" bootstrap-класс col-6 вместо col-1:
                 output_TrumpCard = 
-                    <Card key={trumpCard.id} size={trumpCard.size} suit={trumpCard.suit}
+                    <Card key={trumpCard.id} rank={trumpCard.rank} suit={trumpCard.suit}
                         bootStrapColClass="col-6" hidden={false} />;
             }
             

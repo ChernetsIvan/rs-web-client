@@ -460,7 +460,7 @@ function startGameButtonClickHandler(simpleDurakObject){
 
     //Наполняем колоду картами
     //На ходу устанавливаем power для каждой карты по принципу:
-    //козырь->10*size.cardValue, НЕкозырь->1*size.cardValue
+    //козырь->10*rank.cardValue, НЕкозырь->1*rank.cardValue
     let z = 0;
     let power, coef;
     
@@ -470,7 +470,7 @@ function startGameButtonClickHandler(simpleDurakObject){
         }else{
             coef = 1;
         }
-        cardSizes.forEach(function(element2, index2, array2){
+        cardRanks.forEach(function(element2, index2, array2){
             power = coef * element2.cardValue;
             fullDeck.push(
                 new CardModel(z, element2, element, power)
@@ -534,7 +534,7 @@ function removeCardsFromTableAndGiveCards(givePlayerFirst){
 function isFieldContainSuchCard(inputCard){
     let field = aiField.concat(playerField);
     let card = find(field, (card) => {
-        return card.size.cardValue === inputCard.size.cardValue;
+        return card.rank.cardValue === inputCard.rank.cardValue;
     });
     if(card === undefined){
         return false;
@@ -544,7 +544,7 @@ function isFieldContainSuchCard(inputCard){
 }
 
 
-const cardSizes = [
+const cardRanks = [
     {text: "6", cardValue:1},
     {text: "7", cardValue:2},
     {text: "8", cardValue:3},

@@ -35,29 +35,29 @@ class Card extends React.Component{
             //Показываем карту Игроку
 
             let suit = this.props.suit.suit.toString();
-            let size = this.props.size.text.toString();
+            let rank = this.props.rank.text.toString();
 
             let suitImg;
             let sizeText;
             switch(suit){
                 case "Ч":{
                     suitImg = heartSuit;
-                    sizeText = <b className="redText">{size}</b>
+                    sizeText = <b className="redText">{rank}</b>
                     break;
                 }
                 case "К":{
                     suitImg = clubSuit;
-                    sizeText = <b className="blackText">{size}</b>
+                    sizeText = <b className="blackText">{rank}</b>
                     break;
                 }
                 case "П":{
                     suitImg = spadeSuit;
-                    sizeText = <b className="blackText">{size}</b>
+                    sizeText = <b className="blackText">{rank}</b>
                     break;
                 }
                 case "Б":{
                     suitImg = diamondSuit;
-                    sizeText = <b className="redText">{size}</b>
+                    sizeText = <b className="redText">{rank}</b>
                     break;
                 }
                 default: suitImg = null;
@@ -96,7 +96,7 @@ export default Card;
 Card.propTypes = {
     id: PropTypes.number,
     key: PropTypes.number,
-    size: PropTypes.shape({
+    rank: PropTypes.shape({
         text: PropTypes.text,
         cardValue: PropTypes.number
     }),

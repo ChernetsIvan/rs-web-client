@@ -65,15 +65,15 @@ class AiActions{
                 //Это начало Атаки - первый ход?
                 if(aiField.length === 0){
                     //Выясняем, с чего бы лучше походить.
-                    //Ищем одинаковые по power и size.cardValue.
+                    //Ищем одинаковые по power и rank.cardValue.
                     //Для этого сначала нужно выяснить, есть ли в computerCards 
-                    //одинаковые по size.cardValue карты. А уже благодаря 
+                    //одинаковые по rank.cardValue карты. А уже благодаря 
                     //сортировке по power они будут рядом
                     for(let i=0; i<computerCards.length-1; i++){
                         let cCard = computerCards[i];
                         for(let j=i+1; j<computerCards.length; j++){
-                            if(cCard.size.cardValue === 
-                            computerCards[j].size.cardValue){                            
+                            if(cCard.rank.cardValue === 
+                            computerCards[j].rank.cardValue){                            
                                 //Одинаковые по размеру. 
                                 //Тогда ходим этой и выходим.
                                 AiActions.aiContinueAttack(i, aiField, computerCards, 
@@ -82,7 +82,7 @@ class AiActions{
                             }        
                         }
                     }
-                    //Одинаковых по size.cardValue и power не нашлось, ходим самой слабой.
+                    //Одинаковых по rank.cardValue и power не нашлось, ходим самой слабой.
                     AiActions.aiContinueAttack(0,aiField, computerCards, gameMode, GameMode);                    
                 }else{
                     //Это продолжение атаки.
