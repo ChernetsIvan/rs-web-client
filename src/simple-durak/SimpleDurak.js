@@ -462,22 +462,23 @@ function startGameButtonClickHandler(simpleDurakObject){
     //На ходу устанавливаем power для каждой карты по принципу:
     //козырь->10*size.cardValue, НЕкозырь->1*size.cardValue
     let z = 0;
-    let power, coef;    
-    for(let i = 0; i < cardSuits.length; i++){
-        if(cardSuits[i].suit === trumpSuit.suit){
+    let power, coef;
+    
+    cardSuits.forEach(function(element,index, array){
+        if(element.suit === trumpSuit.suit){
             coef = 10;
         }else{
             coef = 1;
         }
-        for(let j = 0; j < cardSizes.length; j++){
-            power = coef * cardSizes[j].cardValue;
+        cardSizes.forEach(function(element2, index2, array2){
+            power = coef * element2.cardValue;
             fullDeck.push(
-                new CardModel(z, cardSizes[j], cardSuits[i], power)
+                new CardModel(z, element2, element, power)
             );
             z++;
-        }
-    }   
-
+        });
+    });
+    
     //Вызов этих и выше методов именно в таком порядке!    
     fullDeck = DeckShuffler.shuffle(fullDeck); 
     CardMover.moveAnyCardWithTrumpSuitToTailOfFullDeck(trumpSuit, fullDeck);
