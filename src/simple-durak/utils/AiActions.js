@@ -91,12 +91,14 @@ class AiActions{
                     //Поочерёдно проверяем наши отсортированные карты и выбираем ту,
                     //которой МОЖНО (см. далее - будет проверка->ВЫГОДНО) атаковать
                     let indexCardWeMayAttack = null;
-                    for(let i=0; i<computerCards.length; i++){
-                        if(isFieldContainSuchCard(computerCards[i])){
-                            indexCardWeMayAttack = i;
-                            break;
+                    computerCards.every(function(element, index,array){
+                        if(isFieldContainSuchCard(element)){
+                            indexCardWeMayAttack = index;
+                            return false;
                         }
-                    }
+                        return true;
+                    });
+
                     if(indexCardWeMayAttack===null){
                         //Не найдена ни одна карта, которой МОЖНО было бы атаковать.
                         AiActions.aiStopAttack(removeCardsFromTableAndGiveCards, 

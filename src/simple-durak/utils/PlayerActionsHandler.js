@@ -8,6 +8,55 @@ class PlayerActionsHandler{
 
         //У Игрока есть карты?
         if(playerCards.length > 0){
+
+            playerCards.every(function(element, index, array){
+                //Это та карта, что выбрал Игрок?
+                if(element.id === cardID){
+                    if(gameMode.mode === GameMode.PlayerAttack){                    
+                        //Это первая карта на playerField? Если нет - ход допустим?
+                        if( (playerField.length === 0) ||
+                            isFieldContainSuchCard(element)===true){                         
+                            
+                            playerField.push(element);                        
+                            playerCards.splice(index, 1);                         
+                            gameMode.mode = GameMode.AiDefence;                        
+                            //заставляем AI сделать ход защиты
+                            makeAi_Defence_Move(gameMode, GameMode, playerField, 
+                                computerCards, aiField, trumpSuit);
+                        }
+                        return false;
+                    }
+
+                    if(gameMode.mode === GameMode.PlayerDiscard){
+                        //Такая карта допустима?
+                        if(isFieldContainSuchCard(element)===true){
+                            playerField.push(element);                        
+                            playerCards.splice(index, 1);                         
+                        }
+                        return false;
+                    }
+
+                    if(gameMode.mode === GameMode.PlayerDefence){
+                        if(element.power > aiField[aiField.length-1].power){                        
+                            //Карта больше по силе. Масть правильная? Или если козырь, то ОК.
+                            if(element.suit.suit===
+                                aiField[aiField.length-1].suit.suit || 
+                                element.suit.suit=== trumpSuit.suit){
+                                
+                                playerField.push(element);                        
+                                playerCards.splice(index, 1);
+                                gameMode.mode = GameMode.AiAttack;   
+                                //заставляем AI сделать ход атаки
+                                makeAi_Attack_Move(gameMode, GameMode, computerCards, aiField, 
+                                    isFieldContainSuchCard, fullDeck, removeCardsFromTableAndGiveCards);     
+                            }                    
+                        }
+                        return false;
+                    }
+                }
+                return true;
+            });
+/*
             for(let i = 0; i < playerCards.length; i ++){
                 //Это та карта, что выбрал Игрок?
                 if(playerCards[i].id === cardID){
@@ -55,6 +104,7 @@ class PlayerActionsHandler{
                     }
                 }
             }
+            */
         }        
     }
 
