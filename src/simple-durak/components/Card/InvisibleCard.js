@@ -2,12 +2,13 @@ import React from 'react';
 
 import Card from './Card';
 
+import { uniqueId } from 'lodash-es';
+
 //Применяется AI.js, Player.js и Field.js - когда во входном массиве нет карт:
 //чтобы "не скакала" разметка. 
 class InvisibleCard extends React.Component{
     render(){
-        let randKey = Math.random() * 1000000; //наверняка уникальный Key
-        randKey = Math.round(randKey);
+        let randKey = uniqueId();
         return(
             <div className="container invisible">
                 <div className="row">                            

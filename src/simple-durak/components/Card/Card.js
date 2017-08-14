@@ -100,7 +100,9 @@ Card.propTypes = {
         text: PropTypes.text,
         cardValue: PropTypes.number
     }),
-    suit: PropTypes.string,
+    suit: PropTypes.shape({
+        suit: PropTypes.string
+    }),
     onCardClick: PropTypes.func,
     bootStrapColClass: PropTypes.string,
     hidden: PropTypes.bool
