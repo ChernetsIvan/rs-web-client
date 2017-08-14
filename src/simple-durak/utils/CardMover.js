@@ -8,7 +8,7 @@ class CardMover{
     static moveAnyCardWithTrumpSuitToTailOfFullDeck(trumpSuit, fullDeck){
         let card = find(fullDeck, (card) => {
             return card.suit.suit === trumpSuit.suit;
-        })
+        });
         pull(fullDeck, card);
         fullDeck.push(card);
     }
