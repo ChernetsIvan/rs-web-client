@@ -1,4 +1,4 @@
-import { pull, find } from 'lodash-es'
+import { pull, find } from 'lodash-es';
 
 //Перемещает карты внутри колоды
 class CardMover{

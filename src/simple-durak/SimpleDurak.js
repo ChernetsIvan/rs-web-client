@@ -24,6 +24,8 @@ import TrumpChooser from './utils/TrumpChooser';
 import PlayerActionsHandler from './utils/PlayerActionsHandler';
 import AiActions from './utils/AiActions';
 
+import { find } from 'lodash-es';
+
 const GameMode = Enum(
     "PlayerAttack", 
     "PlayerDefence", 
@@ -530,12 +532,14 @@ function removeCardsFromTableAndGiveCards(givePlayerFirst){
 //Игровое поле(aiField + playerField) содержит такую же по размеру карту inputCard?
 function isFieldContainSuchCard(inputCard){
     let field = aiField.concat(playerField);
-    for(let i = 0; i < field.length; i++){
-        if(inputCard.size.cardValue === field[i].size.cardValue){
-            return true;
-        }
+    let card = find(field, (card) => {
+        return card.size.cardValue === inputCard.size.cardValue;
+    });
+    if(card === undefined){
+        return false;
+    }else{
+        return true;
     }
-    return false;
 }
 
 
