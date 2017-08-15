@@ -17,7 +17,6 @@ import RemoveCardsFromTableButton from './components/buttons/RemoveCardsFromTabl
 import AiTakeButton from './components/buttons/AiTakeButton';
 
 //Классы-утилиты
-import TrumpChooser from './utils/TrumpChooser';
 import PlayerActionsHandler from './utils/PlayerActionsHandler';
 import AiActions from './utils/AiActions';
 import DeckUtils from './utils/DeckUtils';
@@ -454,7 +453,7 @@ function startGameButtonClickHandler(simpleDurakObject){
     //чистим массивы от прошлой игры
     clearArrays();
 
-    trumpSuit = TrumpChooser.chooseSuitForTrumpCardInFuture(cardSuits);
+    trumpSuit = DeckUtils.chooseSuitForTrumpCardInFuture(cardSuits);
 
     //Наполняем колоду картами
     //На ходу устанавливаем power для каждой карты по принципу:
