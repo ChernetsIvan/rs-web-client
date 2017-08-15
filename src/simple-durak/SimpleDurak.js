@@ -5,6 +5,7 @@ import Enum from 'es6-enum'
 import CardModel from './models/CardModel'
 
 //Классы-компоненты
+import StartScreen from './StartScreen';
 import './components/Card/Card.css' // Подключаем единожды, чтобы не объявлять в каждом из components!
 import AI from './components/AI';
 import Player from './components/Player';
@@ -219,7 +220,11 @@ class SimpleDurak extends React.Component{
         let output = null;
         if(isRenderSettingsForStartNewGame){
             //Отображение настроек для начала Новой игры
-            output = RenderSettingsForStartNewGame(this);
+            //output = RenderSettingsForStartNewGame(this);
+            output = 
+                <StartScreen isFirstMovePlayer={this.state.isFirstMovePlayer} 
+                    onClickStartGame={this.handleStartGameClick}
+                    onChangeRadio={this.handleRadioChange} />
         }else{
             //Отображение Игрового процесса (gameScreen и т.д.)
             output = RenderGameProcess(this, gameScreen);
@@ -230,7 +235,7 @@ class SimpleDurak extends React.Component{
 }
 
 export default SimpleDurak;
-
+/*
 function RenderSettingsForStartNewGame(simpleDurakObject){
     let dash = <span>&mdash;</span>;
     return (
@@ -280,7 +285,7 @@ function RenderSettingsForStartNewGame(simpleDurakObject){
         </div>
     );
 }
-
+*/
 function RenderDeveloperViewMode(simpleDurakObject){
     return(
         <div> 
