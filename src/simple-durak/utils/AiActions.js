@@ -1,3 +1,5 @@
+import DeckSort from './DeckSort';
+
 class AiActions{
 
     //AI: Сделать ход 'защиты'
@@ -7,7 +9,7 @@ class AiActions{
 
         if(gameMode.mode===GameMode.AiDefence){
             let cardToBeat = playerField[playerField.length-1];
-            AiActions.sortInputDeckByPower(computerCards,true);
+            DeckSort.sortInputDeckByPower(computerCards,true);
             
             //Сначала пытаемся отбиться НЕ козырем
             let result = computerCards.every(function(element,index,array){
@@ -60,7 +62,7 @@ class AiActions{
         isFieldContainSuchCard, fullDeck, removeCardsFromTableAndGiveCards){
         if(gameMode.mode===GameMode.AiAttack){
             if(computerCards.length > 0){
-                AiActions.sortInputDeckByPower(computerCards,true);
+                DeckSort.sortInputDeckByPower(computerCards,true);
                 
                 //Это начало Атаки - первый ход?
                 if(aiField.length === 0){
@@ -157,18 +159,6 @@ class AiActions{
     static aiStopAttack(removeCardsFromTableAndGiveCards, gameMode, GameMode){
         removeCardsFromTableAndGiveCards(false);
         gameMode.mode = GameMode.PlayerAttack;
-    }
-
-    //отсортировать входной массив карт по возрастанию isAsc=true
-    //(убыванию-> isAsc=false)  по параметру 'power'
-    static sortInputDeckByPower(inputDeck, isAsc){
-        inputDeck.sort(function(a,b){
-            if(isAsc){
-                return a.power - b.power;
-            }else{
-                return b.power - a.power;
-            }        
-        });
     }
 }
 

@@ -23,6 +23,7 @@ import CardsGiver from './utils/CardsGiver';
 import TrumpChooser from './utils/TrumpChooser';
 import PlayerActionsHandler from './utils/PlayerActionsHandler';
 import AiActions from './utils/AiActions';
+import DeckSort from './utils/DeckSort';
 
 import { find } from 'lodash-es';
 
@@ -483,7 +484,8 @@ function startGameButtonClickHandler(simpleDurakObject){
     fullDeck = DeckShuffler.shuffle(fullDeck); 
     CardMover.moveAnyCardWithTrumpSuitToTailOfFullDeck(trumpSuit, fullDeck);
     CardsGiver.giveUpToSixCards(fullDeck, computerCards);
-    CardsGiver.giveUpToSixCards(fullDeck,playerCards);   
+    CardsGiver.giveUpToSixCards(fullDeck,playerCards);
+    DeckSort.sortInputDeckByPower(playerCards, true);   
     
     if(isFirstMovePlayer){
         //Первым ходит Игрок:
@@ -528,6 +530,7 @@ function removeCardsFromTableAndGiveCards(givePlayerFirst){
         CardsGiver.giveUpToSixCards(fullDeck, computerCards);
         CardsGiver.giveUpToSixCards(fullDeck,playerCards);
     }
+    DeckSort.sortInputDeckByPower(playerCards, true);
 }
 
 //Игровое поле(aiField + playerField) содержит такую же по размеру карту inputCard?
