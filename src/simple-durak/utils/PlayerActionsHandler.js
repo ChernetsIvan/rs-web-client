@@ -1,11 +1,12 @@
 import DeckUtils from './DeckUtils';
+import AiActions from './AiActions';
 
 class PlayerActionsHandler{
 
     //Вся обработка кликов Игрока по картам Игрока 
     static handleClickOnCard(cardID, playerCards, gameMode, GameMode,
-        playerField, isFieldContainSuchCard, makeAi_Defence_Move, 
-        aiField, trumpSuit, makeAi_Attack_Move, fullDeck, computerCards,
+        playerField, isFieldContainSuchCard, 
+        aiField, trumpSuit, fullDeck, computerCards,
         removeCardsFromTableAndGiveCards){
 
         //У Игрока есть карты?
@@ -23,7 +24,7 @@ class PlayerActionsHandler{
                             playerCards.splice(index, 1);                         
                             gameMode.mode = GameMode.AiDefence;                        
                             //заставляем AI сделать ход защиты
-                            makeAi_Defence_Move(gameMode, GameMode, playerField, 
+                            AiActions.makeAi_Defence_Move(gameMode, GameMode, playerField, 
                                 computerCards, aiField, trumpSuit);
                         }
                         return false;
@@ -49,7 +50,7 @@ class PlayerActionsHandler{
                                 playerCards.splice(index, 1);
                                 gameMode.mode = GameMode.AiAttack;   
                                 //заставляем AI сделать ход атаки
-                                makeAi_Attack_Move(gameMode, GameMode, computerCards, aiField, 
+                                AiActions.makeAi_Attack_Move(gameMode, GameMode, computerCards, aiField, 
                                     isFieldContainSuchCard, fullDeck, removeCardsFromTableAndGiveCards);     
                             }                    
                         }
@@ -62,9 +63,8 @@ class PlayerActionsHandler{
     }
 
     //Обработка нажатия на кнопку "Беру!"
-    static handleClickOnTakeButton(playerField, playerCards, aiField,
-        fullDeck, computerCards, gameMode, GameMode,
-        makeAi_Attack_Move, isFieldContainSuchCard, removeCardsFromTableAndGiveCards){
+    static handleClickOnTakeButton(playerField, playerCards, aiField, fullDeck, computerCards, 
+        gameMode, GameMode, isFieldContainSuchCard, removeCardsFromTableAndGiveCards){
 
         //TODO - тут написать обработку сброса карт для AI
 
@@ -81,7 +81,7 @@ class PlayerActionsHandler{
         DeckUtils.giveUpToSixCards(fullDeck, computerCards);
 
         gameMode.mode = GameMode.AiAttack;
-        makeAi_Attack_Move(gameMode, GameMode, computerCards, 
+        AiActions.makeAi_Attack_Move(gameMode, GameMode, computerCards, 
             aiField, isFieldContainSuchCard, fullDeck, removeCardsFromTableAndGiveCards);
     }
 

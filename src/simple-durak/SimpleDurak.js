@@ -129,8 +129,7 @@ class SimpleDurak extends React.Component{
     handlePlayerTakeClick(){
         
         PlayerActionsHandler.handleClickOnTakeButton(playerField, playerCards, aiField,
-            fullDeck, computerCards,  gameMode, GameMode,
-            AiActions.makeAi_Attack_Move, isFieldContainSuchCard, 
+            fullDeck, computerCards,  gameMode, GameMode, isFieldContainSuchCard, 
             removeCardsFromTableAndGiveCards);
 
         this.setState({
@@ -159,10 +158,8 @@ class SimpleDurak extends React.Component{
     }
 
     handlePlayerMove(cardID){
-        PlayerActionsHandler.handleClickOnCard(
-            cardID, playerCards, gameMode, GameMode, playerField,
-            isFieldContainSuchCard, AiActions.makeAi_Defence_Move, aiField,
-            trumpSuit, AiActions.makeAi_Attack_Move, fullDeck, computerCards,
+        PlayerActionsHandler.handleClickOnCard(cardID, playerCards, gameMode, GameMode, playerField,
+            isFieldContainSuchCard, aiField, trumpSuit, fullDeck, computerCards, 
             removeCardsFromTableAndGiveCards);
         
         this.setState({
