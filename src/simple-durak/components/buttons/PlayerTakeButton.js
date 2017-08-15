@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class PlayerTakeButton extends React.Component{
     constructor(props){
         super(props);
-
         this.onClick = this.onClick.bind(this);
     }
 
@@ -12,8 +11,7 @@ class PlayerTakeButton extends React.Component{
         this.props.onClickHandler();
     }
 
-    render(){
-        
+    render(){        
         let button = null;
         if(this.props.mode.mode === this.props.GameMode.PlayerDefence || 
             this.props.mode.mode === this.props.GameMode.AiDiscard){
@@ -21,30 +19,13 @@ class PlayerTakeButton extends React.Component{
             let dash = <span>&mdash;</span>;
             if(this.props.playerCards.length > 0 ){
                 button = (
-                    <button
-                    className="btn btn-danger" 
-                    onClick={this.onClick}>
+                    <button className="btn btn-danger" onClick={this.onClick}>
                         {dash} Беру!
                     </button>
                 );
             }
         }
-        
-        let output = null;
-        if(this.props.viewMode===this.props.viewModes.developerMode){
-            output = (
-                <div className="container mt-1">
-                    <div className="row justify-content-center">
-                        {button}
-                    </div>
-                </div>
-            );
-        }
-        if(this.props.viewMode===this.props.viewModes.userMode){
-            output = button;
-        }
-        
-        return output;
+        return button;
     }
 }
 
@@ -54,7 +35,5 @@ PlayerTakeButton.propTypes = {
     mode: PropTypes.array,
     GameMode:PropTypes.any,
     onClickHandler: PropTypes.any,
-    viewMode:PropTypes.string,
-    viewModes: PropTypes.object,
     playerCards: PropTypes.array
 };

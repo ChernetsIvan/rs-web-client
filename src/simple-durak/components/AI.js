@@ -7,57 +7,37 @@ import Card from './Card/Card';
 class AI extends React.Component{
     render(){
         let output = null;
-        
-        if(this.props.viewMode===this.props.viewModes.developerMode){
+        if(this.props.cards.length > 0){
+            //Не забываем, что выводим только первые 9 рубашкой кверху карт           
+            
+            let inputCards = [];
+            inputCards = this.props.cards.concat();
+            //И показываем, сколько не видно
+            let countOfCardsThatNotShown = 0;
+            let out_countOfCardsThatNotShown = null;
+            while(inputCards.length > 9){
+                inputCards.pop();
+                countOfCardsThatNotShown++;
+                out_countOfCardsThatNotShown = <b>+{countOfCardsThatNotShown}</b>;
+            }
 
-            let cards = this.props.cards.map((elem)=>{
-                return <Card id = {elem.id} key={elem.id} rank={elem.rank} suit={elem.suit}
-                    bootStrapColClass="col-1" hidden={false} />;
-            });
+            let outputCards = inputCards.map((elem)=>{
+                return <Card key={elem.id} bootStrapColClass="col-1 ml-3" hidden={true}/>
+            }); 
 
             output = (
-                <div className="container">
-                    <div className="row justify-content-center">                    
-                        {cards}                    
+                <div className="container mt-1">
+                    <div className="row justify-content-center">              
+                        {outputCards}
+                        <div className="col-1 align-self-center">
+                            {out_countOfCardsThatNotShown}
+                        </div> 
                     </div>
                 </div>
             );
+        }else{
+            output = <InvisibleCard />;
         }
-
-        if(this.props.viewMode===this.props.viewModes.userMode){
-            if(this.props.cards.length > 0){
-                //Не забываем, что выводим только первые 9 рубашкой кверху карт           
-                
-                let inputCards = [];
-                inputCards = this.props.cards.concat();
-                //И показываем, сколько не видно
-                let countOfCardsThatNotShown = 0;
-                let out_countOfCardsThatNotShown = null;
-                while(inputCards.length > 9){
-                    inputCards.pop();
-                    countOfCardsThatNotShown++;
-                    out_countOfCardsThatNotShown = <b>+{countOfCardsThatNotShown}</b>;
-                }
-
-                let outputCards = inputCards.map((elem)=>{
-                    return <Card key={elem.id} bootStrapColClass="col-1 ml-3" hidden={true}/>
-                }); 
-
-                output = (
-                    <div className="container mt-1">
-                        <div className="row justify-content-center">              
-                            {outputCards}
-                            <div className="col-1 align-self-center">
-                                {out_countOfCardsThatNotShown}
-                            </div> 
-                        </div>
-                    </div>
-                );
-            }else{
-                output = <InvisibleCard />;
-            }
-        }
-        
         return output;
     }
 }
@@ -65,7 +45,5 @@ class AI extends React.Component{
 export default AI;
 
 AI.propTypes = {
-    cards: PropTypes.array,
-    viewMode:PropTypes.string,
-    viewModes: PropTypes.object
+    cards: PropTypes.array
 };

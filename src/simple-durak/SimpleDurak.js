@@ -4,18 +4,9 @@ import Enum from 'es6-enum'
 //Класс-модель
 import CardModel from './models/CardModel'
 
-//Классы-компоненты
-import StartScreen from './StartScreen';
-import './components/Card/Card.css' // Подключаем единожды, чтобы не объявлять в каждом из components!
-import AI from './components/AI';
-import Player from './components/Player';
-import Deck from './components/Deck';
-import Field from './components/Field';
-import Status from './components/Status';
-//кнопки->
-import PlayerTakeButton from './components/buttons/PlayerTakeButton';
-import RemoveCardsFromTableButton from './components/buttons/RemoveCardsFromTableButton';
-import AiTakeButton from './components/buttons/AiTakeButton';
+//Классы-ГлавныеКомпоненты
+import StartScreen from './components/main/StartScreen';
+import GameScreen from './components/main/GameScreen';
 
 //Классы-утилиты
 import PlayerActionsHandler from './utils/PlayerActionsHandler';
@@ -32,9 +23,6 @@ const GameMode = Enum(
     "AiDefence", 
     "AiDiscard");       //Игрок забирает: AI подбрасывает ему карты
 
-
-//Режим отображения Игры
-var ViewMode;
 
 //козырная масть. Есть один из элементов массива cardSuits.
 //обращаться trumpSuit.suit
@@ -61,8 +49,6 @@ var isRenderSettingsForStartNewGame = true;
 class SimpleDurak extends React.Component{
     constructor(props){
         super(props);
-        
-        ViewMode = viewModes.userMode;
 
         this.state = {
             fullDeck: fullDeck,
@@ -70,9 +56,6 @@ class SimpleDurak extends React.Component{
             aiField: aiField,
             playerField: playerField,
             playerCards: playerCards,
-            
-            viewModeButtonText: ViewMode,
-            viewModeButtonClass: "btn btn-success",
             
             playerStartInd:0,
             playerEndInd:9,
@@ -90,7 +73,6 @@ class SimpleDurak extends React.Component{
         this.handleAiTakeClick = this.handleAiTakeClick.bind(this);
 
         this.handlePlayerMove = this.handlePlayerMove.bind(this);
-        this.handleChangeViewMode = this.handleChangeViewMode.bind(this);
         
         this.handlePlayerNextButtonClick = this.handlePlayerNextButtonClick.bind(this);
         this.handlePlayerPrevButtonClick = this.handlePlayerPrevButtonClick.bind(this);
@@ -169,23 +151,6 @@ class SimpleDurak extends React.Component{
         })
     }
 
-    handleChangeViewMode(){
-        if(ViewMode===viewModes.userMode){
-            ViewMode = viewModes.developerMode;
-            this.setState({
-                viewModeButtonText: ViewMode,
-                viewModeButtonClass: "btn btn-danger"
-            });            
-        }else{
-            ViewMode = viewModes.userMode;
-            this.setState({
-                viewModeButtonText: ViewMode,
-                viewModeButtonClass: "btn btn-success"
-            });             
-        }
-        
-    }
-
     handlePlayerNextButtonClick(){
         this.setState({
             playerStartInd: this.state.playerStartInd + 1,
@@ -215,187 +180,33 @@ class SimpleDurak extends React.Component{
                 <StartScreen isFirstMovePlayer={this.state.isFirstMovePlayer} 
                     onClickStartGame={this.handleStartGameClick}
                     onChangeRadio={this.handleRadioChange} />
-        }else{
-            let gameScreen = null;
-
-            if(ViewMode === viewModes.developerMode){
-                gameScreen = RenderDeveloperViewMode(this);
-            }
-            if(ViewMode === viewModes.userMode){
-                gameScreen= RenderUserViewMode(this);
-            }
-
-            //Отображение Игрового процесса (gameScreen и т.д.)
-            output = RenderGameProcess(this, gameScreen);
+        }else{            
+            //output = RenderGameProcess(this);
+            output = 
+                <GameScreen 
+                    handleBeginGameClick={this.handleBeginGameClick}
+                    mode={gameMode}
+                    GameMode={GameMode}
+                    computerCards={computerCards}
+                    playerCards={playerCards}
+                    fullDeck={fullDeck}
+                    firstStart={firstStart}
+                    aiField={aiField}
+                    playerField={playerField}
+                    onPrevClick={this.handlePlayerPrevButtonClick}
+                    onNextClick={this.handlePlayerNextButtonClick}
+                    playerStartInd={this.state.playerStartInd}
+                    playerEndInd={this.state.playerEndInd}
+                    handlePlayerMove={this.handlePlayerMove}
+                    handleRemoveCardsFromTableClick={this.handleRemoveCardsFromTableClick}
+                    handleAiTakeClick={this.handleAiTakeClick}
+                    handlePlayerTakeClick={this.handlePlayerTakeClick} />
         }
 
         return output;     
     }
 }
-
 export default SimpleDurak;
-
-function RenderDeveloperViewMode(simpleDurakObject){
-    return(
-        <div> 
-            Компьютер: 
-            <AI 
-                cards={computerCards} 
-                viewMode={ViewMode}
-                viewModes={viewModes} />
-            <br />
-            <Field cards={aiField} />                
-            <Field cards={playerField} />
-            <br/> 
-            Вы: 
-            <Player 
-                cards={playerCards}
-                viewMode={ViewMode}
-                viewModes={viewModes}
-                onPrevClick={simpleDurakObject.handlePlayerPrevButtonClick}
-                onNextClick={simpleDurakObject.handlePlayerNextButtonClick}
-                playerStartInd={simpleDurakObject.state.playerStartInd}
-                playerEndInd={simpleDurakObject.state.playerEndInd}
-                handlePlayerMove={simpleDurakObject.handlePlayerMove} />              
-
-            <RemoveCardsFromTableButton 
-                aiField={aiField}
-                playerField={playerField}
-                onClickHandler={simpleDurakObject.handleRemoveCardsFromTableClick} 
-                viewMode={ViewMode} 
-                viewModes={viewModes} />
-            <AiTakeButton 
-                mode={gameMode}
-                GameMode={GameMode}
-                onClickHandler={simpleDurakObject.handleAiTakeClick}
-                viewMode={ViewMode} 
-                viewModes={viewModes} />
-            <PlayerTakeButton 
-                mode={gameMode}
-                GameMode={GameMode}
-                onClickHandler={simpleDurakObject.handlePlayerTakeClick}
-                viewMode={ViewMode} 
-                viewModes={viewModes} 
-                playerCards={playerCards}/>                    
-
-            Колода: 
-            <Deck 
-                cards={fullDeck} 
-                viewMode={ViewMode}
-                viewModes={viewModes} />
-        </div>
-    );
-}
-
-function RenderUserViewMode(simpleDurakObject){
-    return (
-        <div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                        <AI 
-                            cards={computerCards} 
-                            viewMode={ViewMode}
-                            viewModes={viewModes} />
-                    </div>
-                    <div className="col-1"></div>
-                </div>
-            </div>
-
-            <div className="container">
-                <div className="row align-items-center">
-                    <div className="col-10">
-                        <Field cards={aiField} />                
-                        <Field cards={playerField} />
-                    </div>
-                    <div className="col-2">
-                        <Deck 
-                            cards={fullDeck} 
-                            viewMode={ViewMode}
-                            viewModes={viewModes} />
-                    </div>                                                       
-                </div>
-            </div>
-
-            <div className="container">
-                <div className="row">
-                    <div className="col-1"></div>
-                    <div className="col-10">
-                        <Player 
-                            cards={playerCards}
-                            viewMode={ViewMode}
-                            viewModes={viewModes} 
-                            onPrevClick={simpleDurakObject.handlePlayerPrevButtonClick}
-                            onNextClick={simpleDurakObject.handlePlayerNextButtonClick}
-                            playerStartInd={simpleDurakObject.state.playerStartInd}
-                            playerEndInd={simpleDurakObject.state.playerEndInd}
-                            handlePlayerMove={simpleDurakObject.handlePlayerMove} />  
-                    </div>
-                    <div className="col-1"></div>
-                </div>
-                <div className="row justify-content-center">
-                    <div className="col-auto">
-                        <RemoveCardsFromTableButton 
-                            aiField={aiField}
-                            playerField={playerField}
-                            onClickHandler={simpleDurakObject.handleRemoveCardsFromTableClick} 
-                            viewMode={ViewMode} 
-                            viewModes={viewModes} />
-                        <AiTakeButton 
-                            mode={gameMode}
-                            GameMode={GameMode}
-                            onClickHandler={simpleDurakObject.handleAiTakeClick} 
-                            viewMode={ViewMode} 
-                            viewModes={viewModes} />
-                        <PlayerTakeButton 
-                            mode={gameMode}
-                            GameMode={GameMode}
-                            onClickHandler={simpleDurakObject.handlePlayerTakeClick} 
-                            viewMode={ViewMode}
-                            viewModes={viewModes} 
-                            playerCards={playerCards} />
-                    </div> 
-                </div>
-            </div>                                 
-        </div>
-    );
-}
-
-function RenderGameProcess(simpleDurakObject, gameScreen){
-    return (
-        <div>
-            <div className="container  my-1">
-                <div className="row justify-content-between">
-                    <div className="col-auto">
-                        <button
-                            className="btn btn-secondary mr-3" 
-                            onClick={simpleDurakObject.handleBeginGameClick}>
-                            
-                            Новая игра
-                        </button>
-                    </div>
-                    <Status 
-                        mode={gameMode}
-                        GameMode={GameMode} 
-                        computerCards={computerCards}
-                        playerCards={playerCards}
-                        fullDeck={fullDeck}
-                        firstStart={firstStart}/>
-                    <div className="col-auto">
-                        <button
-                            className={simpleDurakObject.state.viewModeButtonClass}
-                            onClick={simpleDurakObject.handleChangeViewMode}>
-                            
-                            {ViewMode}
-                        </button>
-                    </div>
-                </div>  
-            </div>
-            {gameScreen}
-        </div>
-    );
-}
 
 
 function startGameButtonClickHandler(simpleDurakObject){
@@ -512,8 +323,3 @@ const cardSuits = [
     {suit: "П"},
     {suit: "Б"}
 ];
-
-const viewModes = {
-    developerMode: "Режим Разработчика", 
-    userMode: "Режим Пользователя"
-}
