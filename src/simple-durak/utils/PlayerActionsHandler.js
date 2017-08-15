@@ -63,7 +63,7 @@ class PlayerActionsHandler{
 
     //Обработка нажатия на кнопку "Беру!"
     static handleClickOnTakeButton(playerField, playerCards, aiField,
-        giveUpToSixCards, fullDeck, computerCards, gameMode, GameMode,
+        fullDeck, computerCards, gameMode, GameMode,
         makeAi_Attack_Move, isFieldContainSuchCard, removeCardsFromTableAndGiveCards){
 
         //TODO - тут написать обработку сброса карт для AI
@@ -78,7 +78,7 @@ class PlayerActionsHandler{
         DeckUtils.sortInputDeckByPower(playerCards, true);
 
         //AI набирает из fullDeck
-        giveUpToSixCards(fullDeck, computerCards);
+        DeckUtils.giveUpToSixCards(fullDeck, computerCards);
 
         gameMode.mode = GameMode.AiAttack;
         makeAi_Attack_Move(gameMode, GameMode, computerCards, 
@@ -87,7 +87,7 @@ class PlayerActionsHandler{
 
     //Обработка нажатия на кнопку "Подбросить нечего, забирай!"
     static handleClickOnAiTakeButton(playerField, computerCards, aiField,
-        giveUpToSixCards, fullDeck, playerCards, gameMode, GameMode){
+        fullDeck, playerCards, gameMode, GameMode){
 
         //Позволяем AI Забрать все карты: и с playerField, и с aiField 
         while(playerField.length > 0){
@@ -98,7 +98,7 @@ class PlayerActionsHandler{
         }
 
         //Player набирает из fullDeck
-        giveUpToSixCards(fullDeck,playerCards);
+        DeckUtils.giveUpToSixCards(fullDeck,playerCards);
         DeckUtils.sortInputDeckByPower(playerCards, true);
 
         gameMode.mode = GameMode.PlayerAttack;

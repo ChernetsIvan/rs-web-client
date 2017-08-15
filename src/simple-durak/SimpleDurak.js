@@ -17,7 +17,6 @@ import RemoveCardsFromTableButton from './components/buttons/RemoveCardsFromTabl
 import AiTakeButton from './components/buttons/AiTakeButton';
 
 //Классы-утилиты
-import CardsGiver from './utils/CardsGiver';
 import TrumpChooser from './utils/TrumpChooser';
 import PlayerActionsHandler from './utils/PlayerActionsHandler';
 import AiActions from './utils/AiActions';
@@ -131,7 +130,7 @@ class SimpleDurak extends React.Component{
     handlePlayerTakeClick(){
         
         PlayerActionsHandler.handleClickOnTakeButton(playerField, playerCards, aiField,
-            CardsGiver.giveUpToSixCards, fullDeck, computerCards,  gameMode, GameMode,
+            fullDeck, computerCards,  gameMode, GameMode,
             AiActions.makeAi_Attack_Move, isFieldContainSuchCard, 
             removeCardsFromTableAndGiveCards);
 
@@ -148,7 +147,7 @@ class SimpleDurak extends React.Component{
     handleAiTakeClick(){
         
         PlayerActionsHandler.handleClickOnAiTakeButton(playerField, computerCards, 
-            aiField, CardsGiver.giveUpToSixCards, fullDeck, playerCards, gameMode,
+            aiField, fullDeck, playerCards, gameMode,
             GameMode);
 
         this.setState({
@@ -481,8 +480,8 @@ function startGameButtonClickHandler(simpleDurakObject){
     //Вызов этих и выше методов именно в таком порядке!    
     fullDeck = DeckUtils.shuffle(fullDeck); 
     DeckUtils.moveAnyCardWithTrumpSuitToTailOfFullDeck(trumpSuit, fullDeck);
-    CardsGiver.giveUpToSixCards(fullDeck, computerCards);
-    CardsGiver.giveUpToSixCards(fullDeck,playerCards);
+    DeckUtils.giveUpToSixCards(fullDeck, computerCards);
+    DeckUtils.giveUpToSixCards(fullDeck,playerCards);
     DeckUtils.sortInputDeckByPower(playerCards, true);   
     
     if(isFirstMovePlayer){
@@ -522,11 +521,11 @@ function removeCardsFromTableAndGiveCards(givePlayerFirst){
     aiField = [];
     playerField = [];
     if(givePlayerFirst){
-        CardsGiver.giveUpToSixCards(fullDeck,playerCards);
-        CardsGiver.giveUpToSixCards(fullDeck, computerCards);        
+        DeckUtils.giveUpToSixCards(fullDeck,playerCards);
+        DeckUtils.giveUpToSixCards(fullDeck, computerCards);        
     }else{
-        CardsGiver.giveUpToSixCards(fullDeck, computerCards);
-        CardsGiver.giveUpToSixCards(fullDeck,playerCards);
+        DeckUtils.giveUpToSixCards(fullDeck, computerCards);
+        DeckUtils.giveUpToSixCards(fullDeck,playerCards);
     }
     DeckUtils.sortInputDeckByPower(playerCards, true);
 }
