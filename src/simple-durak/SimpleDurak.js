@@ -208,24 +208,23 @@ class SimpleDurak extends React.Component{
     }
 
     render(){
-        let gameScreen = null;
-
-        if(ViewMode === viewModes.developerMode){
-            gameScreen = RenderDeveloperViewMode(this);
-        }
-        if(ViewMode === viewModes.userMode){
-            gameScreen= RenderUserViewMode(this);
-        }
-
         let output = null;
         if(isRenderSettingsForStartNewGame){
             //Отображение настроек для начала Новой игры
-            //output = RenderSettingsForStartNewGame(this);
             output = 
                 <StartScreen isFirstMovePlayer={this.state.isFirstMovePlayer} 
                     onClickStartGame={this.handleStartGameClick}
                     onChangeRadio={this.handleRadioChange} />
         }else{
+            let gameScreen = null;
+
+            if(ViewMode === viewModes.developerMode){
+                gameScreen = RenderDeveloperViewMode(this);
+            }
+            if(ViewMode === viewModes.userMode){
+                gameScreen= RenderUserViewMode(this);
+            }
+
             //Отображение Игрового процесса (gameScreen и т.д.)
             output = RenderGameProcess(this, gameScreen);
         }
@@ -235,57 +234,7 @@ class SimpleDurak extends React.Component{
 }
 
 export default SimpleDurak;
-/*
-function RenderSettingsForStartNewGame(simpleDurakObject){
-    let dash = <span>&mdash;</span>;
-    return (
-        <div>
-            <div className="container mt-5">
-                <div className="row justify-content-center">
-                    <div className="col-auto">                        
-                        <h1 className="display-2">Карточная игра</h1>                                                
-                    </div>
-                </div>
-                <div className="row justify-content-center mt-3">
-                    <div className="col-auto">
-                        <h1 className="display-3">"Простой дурак"</h1>
-                    </div>
-                </div> 
-                <div className="row justify-content-center mt-5">                    
-                    <div className="col-auto">
-                        <span className="mr-4"><b>Первым ходит:</b></span>                        
-                        <span className="mr-2">                            
-                            <input type="radio" 
-                                name="PlayerFirst"
-                                className=""
-                                checked={simpleDurakObject.state.isFirstMovePlayer}
-                                onChange={simpleDurakObject.handleRadioChange}/>
-                            <span className="ml-2">Игрок</span>
-                        </span>
-                        <span className="mr-2">
-                            <input type="radio" 
-                                name="AiFirst"
-                                checked={!simpleDurakObject.state.isFirstMovePlayer}
-                                onChange={simpleDurakObject.handleRadioChange}/>
-                            <span className="ml-2">Компьютер</span>
-                        </span>                        
-                    </div>                    
-                </div>
-                <div className="row justify-content-center mt-3">
-                    <div className="col-auto">
-                        <button
-                            className="btn btn-secondary mr-3" 
-                            onClick={simpleDurakObject.handleStartGameClick}>
-                            
-                            {dash} Поехали!
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-}
-*/
+
 function RenderDeveloperViewMode(simpleDurakObject){
     return(
         <div> 
