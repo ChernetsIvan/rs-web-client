@@ -1,4 +1,4 @@
-import DeckSort from './DeckSort';
+import DeckUtils from './DeckUtils';
 
 class AiActions{
 
@@ -9,7 +9,7 @@ class AiActions{
 
         if(gameMode.mode===GameMode.AiDefence){
             let cardToBeat = playerField[playerField.length-1];
-            DeckSort.sortInputDeckByPower(computerCards,true);
+            DeckUtils.sortInputDeckByPower(computerCards,true);
             
             //Сначала пытаемся отбиться НЕ козырем
             let result = computerCards.every(function(element,index,array){
@@ -62,7 +62,7 @@ class AiActions{
         isFieldContainSuchCard, fullDeck, removeCardsFromTableAndGiveCards){
         if(gameMode.mode===GameMode.AiAttack){
             if(computerCards.length > 0){
-                DeckSort.sortInputDeckByPower(computerCards,true);
+                DeckUtils.sortInputDeckByPower(computerCards,true);
                 
                 //Это начало Атаки - первый ход?
                 if(aiField.length === 0){

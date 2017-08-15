@@ -1,4 +1,4 @@
-import DeckSort from './DeckSort';
+import DeckUtils from './DeckUtils';
 
 class PlayerActionsHandler{
 
@@ -75,7 +75,7 @@ class PlayerActionsHandler{
         while(aiField.length > 0){
             playerCards.push(aiField.pop());
         }
-        DeckSort.sortInputDeckByPower(playerCards, true);
+        DeckUtils.sortInputDeckByPower(playerCards, true);
 
         //AI набирает из fullDeck
         giveUpToSixCards(fullDeck, computerCards);
@@ -99,7 +99,7 @@ class PlayerActionsHandler{
 
         //Player набирает из fullDeck
         giveUpToSixCards(fullDeck,playerCards);
-        DeckSort.sortInputDeckByPower(playerCards, true);
+        DeckUtils.sortInputDeckByPower(playerCards, true);
 
         gameMode.mode = GameMode.PlayerAttack;
     }

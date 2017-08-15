@@ -17,13 +17,11 @@ import RemoveCardsFromTableButton from './components/buttons/RemoveCardsFromTabl
 import AiTakeButton from './components/buttons/AiTakeButton';
 
 //Классы-утилиты
-import DeckShuffler from './utils/DeckShuffler';
-import CardMover from './utils/CardMover';
 import CardsGiver from './utils/CardsGiver';
 import TrumpChooser from './utils/TrumpChooser';
 import PlayerActionsHandler from './utils/PlayerActionsHandler';
 import AiActions from './utils/AiActions';
-import DeckSort from './utils/DeckSort';
+import DeckUtils from './utils/DeckUtils';
 
 import { find } from 'lodash-es';
 
@@ -481,11 +479,11 @@ function startGameButtonClickHandler(simpleDurakObject){
     });
     
     //Вызов этих и выше методов именно в таком порядке!    
-    fullDeck = DeckShuffler.shuffle(fullDeck); 
-    CardMover.moveAnyCardWithTrumpSuitToTailOfFullDeck(trumpSuit, fullDeck);
+    fullDeck = DeckUtils.shuffle(fullDeck); 
+    DeckUtils.moveAnyCardWithTrumpSuitToTailOfFullDeck(trumpSuit, fullDeck);
     CardsGiver.giveUpToSixCards(fullDeck, computerCards);
     CardsGiver.giveUpToSixCards(fullDeck,playerCards);
-    DeckSort.sortInputDeckByPower(playerCards, true);   
+    DeckUtils.sortInputDeckByPower(playerCards, true);   
     
     if(isFirstMovePlayer){
         //Первым ходит Игрок:
@@ -530,7 +528,7 @@ function removeCardsFromTableAndGiveCards(givePlayerFirst){
         CardsGiver.giveUpToSixCards(fullDeck, computerCards);
         CardsGiver.giveUpToSixCards(fullDeck,playerCards);
     }
-    DeckSort.sortInputDeckByPower(playerCards, true);
+    DeckUtils.sortInputDeckByPower(playerCards, true);
 }
 
 //Игровое поле(aiField + playerField) содержит такую же по размеру карту inputCard?
