@@ -8,24 +8,11 @@ import registerServiceWorker from './registerServiceWorker';
 
 import App from './App';
 
-registerServiceWorker();
+import reducer from './reducers';
 
-const initialState = [
-    'Smells like spirit',
-    'Enter Sandman'
-];
+registerServiceWorker(); 
 
-function playlist(state = initialState, action){
-    if(action.type === 'ADD_TRACK'){
-        return [
-            ...state,
-            action.payload
-        ];
-    }
-    return state;
-}
-
-const store = createStore(playlist, window.__REDUX_DEVTOOLS_EXTENSION__ && 
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && 
     window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
